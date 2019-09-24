@@ -1,0 +1,92 @@
+<div *ngIf="errors">
+    <p class="text-danger" *ngFor="let item of errors ">{{item}}</p>
+</div>
+
+<div class='col-lg'>
+    <br>
+    <form  (submit)="onSubmit($event, movieForm)" #movieForm="ngForm">
+
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title"
+            required
+            minlength="3" 
+            [(ngModel)]="newMovie.title"
+            #title="ngModel" 
+            class="form-control mb-2" >
+    
+        </div>
+        <div *ngIf="(title.touched || title.dirty) && title.errors">
+            <div *ngIf="title?.errors?.required" class="alert alert-danger">
+              You must enter a title!
+            </div>
+            <div *ngIf="title?.errors?.minlength" class="alert alert-danger">
+              Title must be at least
+              {{ title?.errors?.minlength.requiredLength }} characters
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" name="name" [(ngModel)]="newReview.name" class="form-control mb-2"
+            required
+            minlength="3" 
+            #name="ngModel" 
+            >
+            <div *ngIf="(name.touched || name.dirty) && name.errors">
+                <div *ngIf="name?.errors?.required" class="alert alert-danger">
+                    You must enter a name!
+                </div>
+                <div *ngIf="name?.errors?.minlength" class="alert alert-danger">
+                    Name must be at least
+                    {{ name?.errors?.minlength.requiredLength }} characters
+                </div>
+           
+            </div>
+    
+        </div>
+        <div class="form-group">
+            <label for="rating">Stars</label>
+            <select name="rating" [(ngModel)]="newReview.rating" required #rating="ngModel">                
+                <option value="5">5 star</option>
+                <option value="4">4 star</option>
+                <option value="3">3 star</option>
+                <option value="2">2 star</option>
+                <option value="1">1 star</option>
+
+            </select>
+            <div *ngIf="(rating.touched || rating.dirty) && rating.errors">
+                <div *ngIf="rating?.errors?.required" class="alert alert-danger">
+                    You must enter a rating
+                </div>
+                
+            
+            </div>
+    
+        </div>
+
+        <div class="form-group">
+            <label for="content">Your Review</label>
+            <textarea name="content" [(ngModel)]="newReview.content" class="form-control mb-2"  cols="20" rows="5" 
+            required 
+            minlength="3" 
+            #content="ngModel" ></textarea>
+
+            <div *ngIf="(content.touched || content.dirty) && content.errors">
+                <div *ngIf="content?.errors?.required" class="alert alert-danger">
+                    You must enter a review
+                </div>
+                <div *ngIf="content?.errors?.minlength" class="alert alert-danger">
+                    Review must be at least
+                    {{ name?.errors?.minlength.requiredLength }} characters
+                </div>
+            
+            </div>
+
+        </div>
+        <button  class="btn btn-primary btn-sm" *ngIf="movieForm.valid">Add</button>
+        <button class="btn btn-danger btn-sm" [routerLink]="['/movies']">Cancel</button>
+        
+    </form>
+    <br>
+
+</div>

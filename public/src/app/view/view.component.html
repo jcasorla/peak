@@ -1,0 +1,16 @@
+
+
+
+<br>
+<button (click)="onClickDelete(movie._id)" type="button" class="btn btn-danger btn-sm">delete</button>
+<h2>Revies for {{movie.title}}</h2>
+
+<table class="table" *ngFor="let review of movie.review">  
+    <tr><th>Reviewer</th><th>Stars</th><th>Reviews</th></tr>  
+                
+
+    <tr><td>{{review.name}}</td><td>{{review.rating}}</td><td>{{review.content}}</td>
+    
+    </tr> 
+    
+</table>
